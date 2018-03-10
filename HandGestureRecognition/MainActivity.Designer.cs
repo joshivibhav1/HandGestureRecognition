@@ -76,6 +76,7 @@
             this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -89,6 +90,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(19)))), ((int)(((byte)(46)))));
+            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.minimize);
             this.panel1.Controls.Add(this.exit);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -415,7 +417,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(25, 25);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(25);
@@ -438,9 +440,10 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(96, 13);
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Location = new System.Drawing.Point(25, 41);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(373, 82);
+            this.richTextBox1.Size = new System.Drawing.Size(444, 54);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -449,12 +452,12 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.White;
             this.label1.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(25, 41);
+            this.label1.Location = new System.Drawing.Point(187, -1);
             this.label1.Margin = new System.Windows.Forms.Padding(25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 29);
+            this.label1.Size = new System.Drawing.Size(130, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Text";
+            this.label1.Text = "Text Output";
             // 
             // panel5
             // 
@@ -474,7 +477,7 @@
             this.start.TabIndex = 0;
             this.start.Text = "Start";
             this.start.UseVisualStyleBackColor = true;
-            this.start.Click += new System.EventHandler(this.start_ClickAsync);
+            this.start.Click += new System.EventHandler(this.start_Click);
             // 
             // panel6
             // 
@@ -503,6 +506,17 @@
             this.panel8.Size = new System.Drawing.Size(25, 624);
             this.panel8.TabIndex = 4;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(3, 9);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(289, 25);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Hand Gesture Recognition";
+            // 
             // MainActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -519,6 +533,7 @@
             this.Name = "MainActivity";
             this.Text = "MainActivity";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -582,5 +597,6 @@
         private System.Windows.Forms.Button start;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pauseToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
     }
 }

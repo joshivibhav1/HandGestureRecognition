@@ -28,14 +28,11 @@ namespace HandGestureRecognition
         int adasas = 0;
         char[] array = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' };
         string frameName;
-        Image<Bgr, byte> _imgInput;
         int frameNumber = 1;
         int first = -1;
         int last = -1;
         VideoCapture capture;
-        VideoCapture captureFeature;
         Boolean Pause = false;
-        Boolean captureProcess = false;
         Boolean isFirst = false;
         Boolean isLast = true;
         Matrix<float> response = new Matrix<float>(16, 26) { };
@@ -70,7 +67,6 @@ namespace HandGestureRecognition
                 posY = Cursor.Position.Y - this.Top;
             }
         }
-
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             drag = false;
@@ -90,10 +86,11 @@ namespace HandGestureRecognition
         {
             OpenFileDialog ofd = new OpenFileDialog();
             System.IO.File.WriteAllText(@"g.txt", " ");
-            //ofd.filter
+            ofd.Filter = "MP4 Files (.mp4)|*.mp4";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                frameNumber = 1;
+                frameNumber = 0;
+                capture = null;
                 capture = new VideoCapture(ofd.FileName);
                 Mat m = new Mat();
                 capture.Read(m);
@@ -101,14 +98,14 @@ namespace HandGestureRecognition
             }
         }
 
-        private async void start_ClickAsync(object sender, EventArgs e)
+        private async void start_Click(object sender, EventArgs e)
         {
             if (capture == null)
             {
                 return;
             }
-            try
-            {
+            //try
+            //{
                 double frameNumber = capture.GetCaptureProperty(CapProp.FrameCount);
                 float[] smoothgrad = new float[(int)frameNumber];
                 //label1.Text = "Frame Count is : " + frameNumber.ToString();
@@ -133,11 +130,11 @@ namespace HandGestureRecognition
                         break;
                     }
                 }
-            }
+            /*}
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            }*/
         }
 
         public bool skinAreaDetection(Bitmap b)
@@ -264,7 +261,7 @@ namespace HandGestureRecognition
 
         private async void moduleFeatureExtraction(int first, int last)
         {
-            string fghfh = adasas.ToString() + "    ";
+            string fghfh = "";
             double[,] RawData = new double[16, 3780];
             int mid = (first + last) / 2;
             int low = mid - 8; ;
@@ -338,11 +335,13 @@ namespace HandGestureRecognition
                     TrainData trainData = new TrainData(masjhdb, DataLayoutType.RowSample, response);
                     int features = 16;
                     int classes = 26;
-                    Matrix<int> layers = new Matrix<int>(4, 1);
+                    Matrix<int> layers = new Matrix<int>(6, 1);
                     layers[0, 0] = features;
-                    layers[1, 0] = classes * 4;
-                    layers[2, 0] = classes * 2;
-                    layers[3, 0] = classes;
+                    layers[1, 0] = classes * 16;
+                    layers[2, 0] = classes * 8;
+                    layers[3, 0] = classes * 4;
+                    layers[4, 0] = classes * 2;
+                    layers[5, 0] = classes;
                     ANN_MLP ann = new ANN_MLP();
                     FileStorage fileStorageRead = new FileStorage(@"abc.xml", FileStorage.Mode.Read);
                     ann.Read(fileStorageRead.GetRoot(0));
