@@ -18,6 +18,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
 using Emgu.CV.ML.MlEnum;
+using System.Speech.Synthesis;
 
 namespace HandGestureRecognition
 {
@@ -26,7 +27,7 @@ namespace HandGestureRecognition
         #region declaration
         VideoWriter VideoW;
         int adasas = 0;
-        char[] array = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k' };
+        char[] array = new char[] { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
         string frameName;
         int frameNumber = 1;
         int first = -1;
@@ -87,6 +88,7 @@ namespace HandGestureRecognition
             OpenFileDialog ofd = new OpenFileDialog();
             System.IO.File.WriteAllText(@"g.txt", " ");
             ofd.Filter = "MP4 Files (.mp4)|*.mp4";
+            adasas = 0;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 frameNumber = 0;
@@ -359,6 +361,19 @@ namespace HandGestureRecognition
                     float real = ann.Predict(hehe);
 
                     fghfh += array[(int)real];
+                    SpeechSynthesizer reader = new SpeechSynthesizer();
+
+
+                    if (richTextBox1.Text != " ")
+                    {
+                        reader.Dispose();
+                        reader = new SpeechSynthesizer();
+                        reader.SpeakAsync(fghfh.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Text Present!");
+                    }
                     richTextBox1.Text = fghfh.ToString();
                     System.IO.File.WriteAllText(@"g.txt", real.ToString());
                 }
