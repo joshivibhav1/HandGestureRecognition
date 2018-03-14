@@ -362,8 +362,7 @@ namespace HandGestureRecognition
 
                     fghfh += array[(int)real];
                     SpeechSynthesizer reader = new SpeechSynthesizer();
-
-
+                    
                     if (richTextBox1.Text != " ")
                     {
                         reader.Dispose();
